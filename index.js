@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
-const token = '448548721:AAHWyJD3FyD52uQUfndx4MAKykQ7zJj2HLc';
+const token = process.env.TELEGRAM_TOKEN;
 
 const bot = new TelegramBot(token, {polling: true});
 const currentWeatherUrl = 'http://taganrog.azovseaports.ru/weather/Graph/weather.png';
