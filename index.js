@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
+const textract = require('textract');
 const port = process.env.PORT;
 const token = process.env.TELEGRAM_TOKEN;
 const url = process.env.PUBLIC_URL;
@@ -26,8 +27,11 @@ app.listen(port, () => {
 
 bot.onText(/\/current/, (msg, match) => {
   const chatId = msg.chat.id;
-  const stream = request.get(currentWeatherUrl);
-  bot.sendPhoto(chatId, stream);
+  textract.fromUrl(url, (error, text) => {
+    bot.sendMessage(chatId, text);
+  });
+  // const stream = request.get(currentWeatherUrl);
+  // bot.sendPhoto(chatId, stream);
 });
 
 bot.onText(/\/archive/, (msg, match) => {
