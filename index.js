@@ -50,6 +50,8 @@ bot.onText(/\/help|\/start/, (msg, match) => {
 <b>/help</b> - view help commands \n\r
 
 <i>Resource of weather value</i> <a href="http://taganrog.azovseaports.ru">taganrog.azovseaports.ru</a>
+<i>Author</i> <a href="https://t.me/sklyarov_ivan">Sklyarov Ivan</a>
+
   `;
   bot.sendMessage(chatId, resp, { parse_mode : 'HTML' });
 });
