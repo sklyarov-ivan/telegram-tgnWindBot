@@ -1,10 +1,28 @@
+const express = require('express');
+const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
+const port = process.env.PORT;
 const token = process.env.TELEGRAM_TOKEN;
+const url = process.env.PUBLIC_URL;
 
 const bot = new TelegramBot(token, {polling: true});
 const currentWeatherUrl = 'http://taganrog.azovseaports.ru/weather/Graph/weather.png';
 const windArchiveUrl = 'http://taganrog.azovseaports.ru/weather/Graph/wind.png'
+
+// This informs the Telegram servers of the new webhook.
+bot.setWebHook(`${url}/bot${token}`);
+
+const app = express();
+app.use(bodyParser.json());
+app.post(`/bot${token}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+app.listen(port, () => {
+  console.log(`Express server is listening on ${port}`);
+});
 
 bot.onText(/\/current/, (msg, match) => {
   const chatId = msg.chat.id;
