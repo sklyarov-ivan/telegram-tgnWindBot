@@ -27,11 +27,8 @@ app.listen(port, () => {
 
 bot.onText(/\/current/, (msg, match) => {
   const chatId = msg.chat.id;
-  textract.fromUrl(url, (error, text) => {
-    bot.sendMessage(chatId, text);
-  });
-  // const stream = request.get(currentWeatherUrl);
-  // bot.sendPhoto(chatId, stream);
+  const stream = request.get(currentWeatherUrl);
+  bot.sendPhoto(chatId, stream);
 });
 
 bot.onText(/\/archive/, (msg, match) => {
