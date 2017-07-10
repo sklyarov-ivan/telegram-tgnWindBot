@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
-const textract = require('textract');
 const port = process.env.PORT;
 const token = process.env.TELEGRAM_TOKEN;
 const url = process.env.PUBLIC_URL;
@@ -20,6 +19,10 @@ app.post(`/bot${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
+
+setInterval(function() {
+  request.get(url);
+}, 300000); // every 5 minutes (300000)
 
 app.listen(port, () => {
   console.log(`Express server is listening on ${port}`);
