@@ -14,5 +14,8 @@
     "express": "^4.15.3",
     "node-telegram-bot-api": "^0.27.1",
     "request": "^2.81.0"
+  },
+  "engines": {
+    "node" : "7.10.1"
   }
 }
